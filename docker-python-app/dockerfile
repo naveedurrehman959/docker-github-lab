@@ -1,0 +1,38 @@
+FROM python:3.11-slim
+
+
+LABEL maintainer="student@alnafi.com"
+LABEL description="this is a simple python app for learing docker"
+LABEL version="2.0"
+
+ENV APP_NAME="Dockerized python web app"
+ENV APP_VERSION="2.0.0"
+ENV ENVIRONMENT="production"
+ENV DEBUG="false"
+ENV PORT="8080"
+ENV PYTHONUNBUFFERED="1"
+WORKDIR /usr/src/app
+#copy requirements.txt
+COPY app/requirements.txt ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app/ .
+
+RUN chmod +x app.py
+ #non root user create
+
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+RUN chown -R appuser:appuser /usr/src/app
+
+USER appuser
+
+EXPOSE $PORT
+# add healthcheck 
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:$PORT/ || exit 1
+#define command to run application
+
+CMD ["python", "app.py"]
+

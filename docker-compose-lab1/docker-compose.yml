@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  web:
+    image:nginx
+    ports:
+      - "8080:80"
+  db:
+    image: mysql
+    environment:
+       MYSQL_ROOT_PASSWORD=mysecret
+    volumes:
+      - dbdata:/var/lib/mysql
+
+#network:
+volumes:
+  dbdata:
+

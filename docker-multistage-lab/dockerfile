@@ -1,0 +1,32 @@
+# --- Production stage ---
+FROM node:15-alpine AS prod
+ARG PORT=8000
+ENV PORT=${PORT}
+WORKDIR /app
+
+# copy package manifest first for caching
+COPY package.json package-lock.json* ./
+RUN npm ci --only=production || npm install --only=production
+
+# copy source afterward
+COPY src ./src
+
+EXPOSE ${PORT}
+CMD ["npm", "run", "start:prod"]
+
+
+# --- Development stage ---
+FROM node:15-alpine AS dev
+ARG PORT=8000
+ENV PORT=${PORT}
+WORKDIR /app
+
+# copy manifests and install dev deps
+COPY package.json package-lock.json* ./
+RUN npm install
+
+COPY src ./src
+
+ENV NODE_ENV=development
+EXPOSE ${PORT}
+CMD ["npm", "run", "start:dev"]

@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+
+RUN useradd -m boss
+
+USER boss
+
+COPY example-script.sh /home/boss/example-script.sh
+CMD ["bash", "/home/boss/example-script.sh"]

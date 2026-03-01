@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+  app:
+    image: alpine
+    command: ["echo", "Hello,Docker Compose"]
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: passworddb
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:

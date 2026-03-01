@@ -1,0 +1,26 @@
+#logs
+logs/
+*.log
+#temporary files
+*.tmp
+temp.txt
+#version control
+.git/
+.gitignore
+#development dependencies
+node_modules_dev/
+#docs
+docs/
+README.md
+IDE files
+.vscode/
+.idea/
+OS generated files
+.DS_Store
+Thumbs.db
+#docker files
+dockerfile.*
+!dockerfile.optimized
+#build artifacts
+dist/
+build/

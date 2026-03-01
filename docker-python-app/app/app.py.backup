@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import json
+import os
+
+class SimpleHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        
+        response_data = {
+            "message": "Hello from Dockerized Python App!",
+            "status": "success",
+            "container_info": {
+                "hostname": os.environ.get('HOSTNAME', 'unknown'),
+                "python_version": "3.x"
+            }
+        }
+        
+        self.wfile.write(json.dumps(response_data, indent=2).encode())
+
+def run_server():
+    port = int(os.environ.get('PORT', 8080))
+    server = HTTPServer(('0.0.0.0', port), SimpleHandler)
+    print(f"Starting server on port {port}...")
+    print(f"Access the application at http://localhost:{port}")
+    server.serve_forever()
+
+if __name__ == '__main__':
+    run_server()

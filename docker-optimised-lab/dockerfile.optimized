@@ -1,0 +1,5 @@
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html
+#assign port
+EXPOSE 80
+

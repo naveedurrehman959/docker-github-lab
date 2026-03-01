@@ -1,0 +1,15 @@
+FROM python:3.13-slim
+LABEL maintainer="student@alnafi.com"
+LABEL description="simple python web app fordocker learning"
+LABEL version="1.0"
+WORKDIR /usr/src/app
+COPY app/requirements.txt ./
+#install python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app/ .
+RUN chmod +x app.py
+
+EXPOSE 8080
+
+CMD ["python", "app.py"]

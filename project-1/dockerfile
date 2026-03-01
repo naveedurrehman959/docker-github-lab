@@ -1,0 +1,4 @@
+FROM ubuntu:18.04 
+#install nginx and curl
+RUN apt-get update && apt-get install nginx curl -y && rm -rf /var/lib/apt/lists/*
+
