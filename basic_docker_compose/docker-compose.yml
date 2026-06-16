@@ -1,0 +1,13 @@
+services:
+  my_app:
+    build:
+      context: .
+      target: ${MY_ENV}
+    image: node:${MY_ENV}
+    ports:
+      - "8080:${MY_PORT}"
+    volumes:
+      - ~/docker_practical-labs/basic_docker_compose:/app/
+    environment:
+      PORT: ${MY_PORT}
+  

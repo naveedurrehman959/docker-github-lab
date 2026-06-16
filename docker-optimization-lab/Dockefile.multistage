@@ -1,0 +1,15 @@
+FROM node:16-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUM npm insall --only=production
+FROM node:16-alpine AS production
+WORKDIR /app
+COPY --from=builder /app/node_modules ./node_modules
+COPY package*.json ./
+COPY server.js ./
+Copy index.html ./
+RUN addgreoup -g 1001 -S nodejs && \
+adduser -S nodejs -u 1001
+USER nodejs
+EXPOSE 3000
+CMD ["npm", "start"]
