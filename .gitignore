@@ -1,0 +1,56 @@
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Build files
+dist/
+build/
+target/
+
+# Docker
+*.tar
+
+# Temporary files
+*.tmp
+*.swp
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Jenkins
+workspace/
+
+# Secrets
+*.pem
+*.key
+*.crt
+
+# GitLab CI artifacts
+artifacts/
